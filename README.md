@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# shopify-orders-app
-This repository contains a Shopify app that fetches and displays orders from Shopify stores using Laravel and Vue.js.
-
-
 # Shopify Orders App
 
 This Laravel-based application integrates with Shopify to fetch order data, save it to a MySQL database, and display the orders in a user-friendly web interface. It was built as part of a coding challenge to demonstrate integration with a third-party API, backend development with Laravel, and frontend UI implementation with Vue.js.
