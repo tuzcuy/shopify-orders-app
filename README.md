@@ -170,7 +170,7 @@ Access the Shopify Storefront
 
 `https://ygttzc.myshopify.com`
 
-- Use the storefront password to access the store (if password protection is enabled):
+- Use the storefront password to access the store:
 
     Password: `insider`
 
