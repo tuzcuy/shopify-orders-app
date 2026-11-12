@@ -1,5 +1,6 @@
 # Shopify Orders App
 
+![CI](https://github.com/tuzcuy/shopify-orders-app/actions/workflows/ci.yml/badge.svg)
 ![Laravel](https://img.shields.io/badge/Laravel-11-FF2D20?logo=laravel&logoColor=white)
 ![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)
@@ -85,11 +86,18 @@ resources/js/components/OrdersApp.vue         # orders table (Vue 3)
 routes/web.php
 ```
 
+## Tests
+
+```bash
+vendor/bin/pest
+```
+
+Feature tests cover the full sync path with a mocked Shopify client (`Http::fake`, no network): field mapping incl. the empty-email fallback, dedup on refetch (`updateOrCreate`), in-place updates when an order changes upstream, and the error path when the Admin API rejects the request. They run on an in-memory SQLite database; CI runs them on every push.
+
 ## What I'd improve next
 
 - Replace the manual fetch with **Shopify webhooks** (`orders/create`, `orders/updated`) for real-time sync.
 - Move the sync into a **queued job** with cursor-based pagination and Admin API rate-limit handling.
-- Add **feature tests** for the fetch/list endpoints with a mocked Shopify client (Pest is already wired).
 - Server-side pagination and filtering for large order volumes.
 
 ## License
