@@ -14,7 +14,7 @@ class ShopifyController extends Controller
         $this->shopifyService = $shopifyService;
     }
 
-    // Shopify'dan siparişleri çek ve kaydet
+    // Fetch orders from Shopify and persist them
     public function fetchAndSaveOrders()
     {
         try {
@@ -24,7 +24,7 @@ class ShopifyController extends Controller
                 Order::updateOrCreate(
                     ['shopify_order_id' => $order['id']],
                     [
-                        'customer_email' => $order['email'] ?? 'N/A', // Boşsa 'N/A' yaz
+                        'customer_email' => $order['email'] ?? 'N/A', // 'N/A' when empty
                         'total_amount' => $order['total_price'],
                         'order_date' => $order['created_at'],
                     ]
@@ -37,14 +37,14 @@ class ShopifyController extends Controller
         }
     }
 
-    // Tüm siparişleri JSON formatında döndür (Vue.js için)
+    // Return all orders as JSON (consumed by the Vue frontend)
     public function getOrdersList()
     {
         $orders = Order::select('customer_email', 'total_amount', 'shopify_order_id', 'order_date')->get();
         return response()->json($orders);
     }
 
-    // Blade ile siparişleri listeleme (eski yapı, Vue.js'den sonra gerekmez)
+    // Legacy Blade listing (superseded by the Vue frontend)
     public function listOrders()
     {
         $orders = Order::all();
@@ -52,7 +52,7 @@ class ShopifyController extends Controller
     }
     public function showOrdersPage()
     {
-        return view('orders.orders'); // orders.blade.php dosyasını çağırır
+        return view('orders.orders'); // renders orders.blade.php
     }
 
 }

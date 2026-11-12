@@ -38,11 +38,11 @@ class ShopifyService
         if ($response->successful()) {
             $orders = $response->json('orders');
 
-            // E-posta bilgisi olmayan müşteriler için varsayılan değer ekle
+            // Fall back to a default value for customers without an email
             return array_map(function ($order) {
                 return [
                     'id' => $order['id'] ?? null,
-                    'email' => !empty($order['email']) ? $order['email'] : 'N/A', // Boşsa 'N/A' yaz
+                    'email' => !empty($order['email']) ? $order['email'] : 'N/A', // 'N/A' when empty
                     'total_price' => $order['total_price'] ?? '0.00',
                     'created_at' => $order['created_at'] ?? null,
                 ];

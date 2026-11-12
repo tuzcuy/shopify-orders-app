@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    // Veritabanında doldurulabilir (fillable) alanlar
+    // Mass-assignable columns
     protected $fillable = [
         'customer_email',
         'total_amount',
